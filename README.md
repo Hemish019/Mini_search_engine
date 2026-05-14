@@ -48,17 +48,6 @@ Ranks documents based on word frequency.
 
 ---
 
-## Example
-
-Input document:
-
-text Apple mango apple 
-
-Generated index:
-
-text apple -> {1 : 2} mango -> {1 : 1} 
-
----
 
 ## Technologies Used
 - C++
