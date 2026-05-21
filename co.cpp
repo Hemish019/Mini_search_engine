@@ -7,6 +7,7 @@ class Document{
     string title;
     string content;
 public:
+    Document() {}
     Document(ll id,const string& Title,const string& Content): docID(id),title(Title),content(Content) {}
     ll getID() const {
         return docID;
@@ -79,3 +80,75 @@ public:
         return rankedResults;
     }
 };
+
+class SearchEngine{
+    unordered_map<ll, Document> documents;
+    Tokenizer tokenizer;
+    RankingEngine rankingengine;
+    InvertedIndex invertedindex;
+
+    public:
+        void addDocument(const Document& doc) {
+            documents.insert({doc.getID(),doc});
+            vector<string> tokens =tokenizer.tokenize(doc.getContent());
+            invertedindex.addDocument(doc.getID(),tokens);
+        }
+
+        void search(const string& word) {
+            string normalizedWord = word;
+            transform(normalizedWord.begin(),normalizedWord.end(),normalizedWord.begin(),::tolower);
+
+            auto matchedDocs = invertedindex.searchWord( normalizedWord);
+            auto rankedResults = rankingengine.rankings(matchedDocs);
+
+            if (rankedResults.empty()) {
+                cout << "No documents found.\n";
+                return;
+            }
+            cout << "\nSearch Results:\n";
+
+            for (const auto& result : rankedResults) {
+                ll docID = result.first;
+                int frequency = result.second;
+                const Document& doc = documents.at(docID);
+                cout << "DocID: " << docID << "\n";
+                cout << "Title: " << doc.getTitle()<< "\n";
+                cout << "Frequency: "<< frequency<< "\n\n";
+            }
+        }
+
+        void deleteDocument(ll docID) {
+            documents.erase(docID);
+            invertedindex.deleteDocument(docID);
+        }
+};
+
+int main(){
+    SearchEngine engine;
+
+    Document d1(
+        1,
+        "C++ Basics",
+        "C++ is a powerful programming language"
+    );
+
+    Document d2(
+        2,
+        "Search Engines",
+        "Search engines use inverted index for search"
+    );
+
+    Document d3(
+        3,
+        "Advanced C++",
+        "C++ supports object oriented programming"
+    );
+
+    engine.addDocument(d1);
+    engine.addDocument(d2);
+    engine.addDocument(d3);
+
+    engine.search("c++");
+
+    return 0;
+}
