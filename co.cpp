@@ -37,14 +37,14 @@ public:
     }
 };
 
-class InvertedIndex {
-    unordered_map<string,unordered_map<ll,int>> index;
+class PositionalInvertedIndex {
+    unordered_map<string,unordered_map<ll,vector<int>>> index;
 public:
     void addDocument(ll docID,const vector<string>& tokens) {
-        for (const string& token : tokens)
-            index[token][docID]++;
+       for (int pos = 0; pos < tokens.size(); pos++) 
+            index[tokens[pos]][docID].push_back(pos);
     }
-    unordered_map<ll,int>searchWord(const string& word) const {
+    unordered_map<ll,vector<int>>searchWord(const string& word) const {
         auto it = index.find(word);
         if (it == index.end()) {
             return {};
@@ -52,8 +52,10 @@ public:
         return it->second;
     }
     void deleteDocument(ll docID) {
-        for (auto& wordEntry : index) {
-            wordEntry.second.erase(docID);
+        for (auto wordEntry= index.begin();wordEntry !=index.end();) {
+            wordEntry->second.erase(docID);
+            if (wordEntry->second.empty())  wordEntry = index.erase(wordEntry);
+            else ++wordEntry;
         }
     }
 };
@@ -61,11 +63,11 @@ public:
 class RankingEngine {
 public:
     vector<pair<ll,int>>
-    rankings(const unordered_map<ll,int>& docs) const {
+    rankings(const unordered_map<ll,vector<int>>& docs) const {
         priority_queue<pair<int,ll>> pq;
         for (const auto& entry : docs) {
             ll docID = entry.first;
-            int frequency = entry.second;
+            int frequency = entry.second.size();
             pq.push({frequency, docID});
         }
         vector<pair<ll,int>> rankedResults;
@@ -85,20 +87,20 @@ class SearchEngine{
     unordered_map<ll, Document> documents;
     Tokenizer tokenizer;
     RankingEngine rankingengine;
-    InvertedIndex invertedindex;
+    PositionalInvertedIndex positionalinvertedindex;
 
     public:
         void addDocument(const Document& doc) {
             documents.insert({doc.getID(),doc});
             vector<string> tokens =tokenizer.tokenize(doc.getContent());
-            invertedindex.addDocument(doc.getID(),tokens);
+            positionalinvertedindex.addDocument(doc.getID(),tokens);
         }
 
         void search(const string& word) {
             string normalizedWord = word;
             transform(normalizedWord.begin(),normalizedWord.end(),normalizedWord.begin(),::tolower);
 
-            auto matchedDocs = invertedindex.searchWord( normalizedWord);
+            auto matchedDocs = positionalinvertedindex.searchWord( normalizedWord);
             auto rankedResults = rankingengine.rankings(matchedDocs);
 
             if (rankedResults.empty()) {
@@ -119,7 +121,7 @@ class SearchEngine{
 
         void deleteDocument(ll docID) {
             documents.erase(docID);
-            invertedindex.deleteDocument(docID);
+            positionalinvertedindex.deleteDocument(docID);
         }
 };
 

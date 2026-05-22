@@ -3,7 +3,7 @@
 A mini search engine project built in C++ to learn:
 
 - Object-Oriented Programming (OOP)
-- Inverted Indexing
+- Inverted Indexing -> Positional Inverted Index
 - Tokenization
 - Ranking Systems
 - Search Engine Architecture
@@ -15,7 +15,7 @@ A mini search engine project built in C++ to learn:
 - Document storage
 - Tokenization using stringstream
 - Lowercase normalization
-- Inverted indexing
+- Positional Inverted indexing
 - Word frequency tracking
 - Basic document ranking
 
@@ -36,10 +36,10 @@ Responsible for:
 - splitting text into words
 - lowercase conversion
 
-### InvertedIndex
+### Positiona InvertedIndex
 Stores:
 
-text word -> { documentID -> frequency } 
+text word -> { documentID -> Positions } 
 
 Used for fast word search.
 
