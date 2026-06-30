@@ -21,6 +21,30 @@ A mini search engine project built in C++ to learn:
 
 ---
 
+## Architecture
+
+             Documents
+                 │
+                 ▼
+             Tokenizer
+                 │
+                 ▼
+       Inverted Index Builder
+                 │
+      ┌──────────┴──────────┐
+      ▼                     ▼
+ Normal Index      Positional Index
+      │                     │
+      └──────────┬──────────┘
+                 ▼
+          Query Processor
+                 ▼
+          Ranking Engine
+                 ▼
+             Search Results
+
+---
+
 ## Project Structure
 
 text Document Tokenizer InvertedIndex RankingEngine 
