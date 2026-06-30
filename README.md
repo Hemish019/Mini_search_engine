@@ -33,7 +33,7 @@ A mini search engine project built in C++ to learn:
                  │
       ┌──────────┴──────────┐
       ▼                     ▼
- Normal Index      Positional Index
+      Normal Index      Positional Index
       │                     │
       └──────────┬──────────┘
                  ▼
