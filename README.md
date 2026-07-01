@@ -37,8 +37,6 @@ A mini search engine project built in C++ to learn:
       │                     │
       └──────────┬──────────┘
                  ▼
-          Query Processor
-                 ▼
           Ranking Engine
                  ▼
              Search Results
