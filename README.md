@@ -76,7 +76,7 @@ A mini search engine project built in C++ to learn:
 │   └── storage/
 └── MVP-model.cpp
 
-```## Important Classes
+## Important Classes
 
 - `Document`: stores document ID, URL, raw HTML, and extracted text.
 - `SearchEngine`: coordinates document preparation, indexing, query processing, and result lookup.
