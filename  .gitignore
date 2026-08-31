@@ -1,0 +1,20 @@
+# --- Security: Private Keys ---
+pro1
+pro1.pub
+*.key
+*.pem
+
+# --- Build & Output Folders ---
+build/
+bin/
+obj/
+
+# --- Operating System Artifacts ---
+.DS_Store
+Thumbs.db
+
+# --- Executables & Compiled Binaries ---
+main
+*.exe
+*.out
+*.app
