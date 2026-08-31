@@ -60,10 +60,14 @@ public:
     }
 };
 
+class QueryProcessor{
+    public:
+        
+};
+
 class RankingEngine {
 public:
-    vector<pair<ll,int>>
-    rankings(const unordered_map<ll,vector<int>>& docs) const {
+    vector<pair<ll,int>> rankings(const unordered_map<ll,vector<int>>& docs) const {
         priority_queue<pair<int,ll>> pq;
         for (const auto& entry : docs) {
             ll docID = entry.first;
@@ -130,8 +134,8 @@ int main(){
 
     Document d1(
         1,
-        "C++ Basics",
-        "C++ is a powerful programming language"
+        "Cpp Basics",
+        "Cpp is a powerful programming language. Cpp is just like C but Cpp is more advanced and has better features"
     );
 
     Document d2(
@@ -142,15 +146,15 @@ int main(){
 
     Document d3(
         3,
-        "Advanced C++",
-        "C++ supports object oriented programming"
+        "Advanced Cpp",
+        "Cpp supports object oriented programming"
     );
 
     engine.addDocument(d1);
     engine.addDocument(d2);
     engine.addDocument(d3);
 
-    engine.search("c++");
+    engine.search("cpp");
 
     return 0;
 }

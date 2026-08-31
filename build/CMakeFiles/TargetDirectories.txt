@@ -1,0 +1,4 @@
+/Users/hemishreddy/Desktop/Projects/search engine learning/build/CMakeFiles/search_engine.dir
+/Users/hemishreddy/Desktop/Projects/search engine learning/build/CMakeFiles/run_tests.dir
+/Users/hemishreddy/Desktop/Projects/search engine learning/build/CMakeFiles/edit_cache.dir
+/Users/hemishreddy/Desktop/Projects/search engine learning/build/CMakeFiles/rebuild_cache.dir
