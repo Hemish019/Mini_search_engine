@@ -37,7 +37,7 @@ A mini search engine project built in C++ to learn:
       │                     │
       └──────────┬──────────┘
                  ▼
-          TF/IDF Ranking Engine
+          TF-IDF Ranking Engine
                  ▼
              Search Results
 
